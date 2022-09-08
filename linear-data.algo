@@ -1,0 +1,73 @@
+ALGORITHM algo2 checkpoint
+VAR
+    arr1 : ARRAY_OF INTEGER[4];
+    arr2 : ARRAY_OF INTEGER[4];
+    sum: INTEGER=0;
+    i,j:INTEGER
+    test:BOOLEAN
+    BEGIN
+    FOR i FROM 0 TO 3 STEP 1  DO
+        FOR j FROM 0 TO 3 STEP 1  DO
+            IF (arr1[i]=arr2[j]) THEN
+                test=false
+            END_IF
+        END_FOR
+        test=true;
+        sum:=sum+arr1[i]
+
+    END_FOR
+    FOR j FROM 0 TO 3 STEP 1  DO
+        FOR i FROM 0 TO 3 STEP 1  DO
+            IF(arr1[j]=arr1[i]) THEN
+            test=false
+            END_IF
+        END_FOR
+        test=true
+        sum:=sum+arr2[j]
+    END_FOR
+END
+//  solution 2
+ALGORITHM solution 2
+VAR
+
+    arr1, arr2 : ARRAY_OF INTEGER[15];
+    htab: HASH_TABLE<INTEGER,INTEGER>;
+    sum,i,j :INTEGER:=0;
+    mykeys: ARRAY_OF INTEGER[25]
+BEGIN
+    // Read and insert arr1 
+    FOR i FROM 0 TO arr1.length-1 STEP 1  DO
+        FOR j FROM 0 TO arr2.length-1 STEP 1  DO
+
+        IF (arr1[i]=arr2[j]) THEN
+             Read(arr1[i])
+        htab.insert(arr1[i],0)
+        ELSE
+        Read(arr1[i])
+        htab.insert(arr1[i],1)
+         END_IF
+        END_FOR
+
+
+    END_FOR
+    // Read and insert arr2
+    FOR j FROM 0 TO arr2.length-1 STEP 1  DO
+        FOR i FROM 0 TO arr1.length-1 STEP 1  DO
+           IF (arr2[j]=arr1[i]) THEN
+             Read(arr2[j])
+        htab.insert(arr2[j],0)
+        ELSE
+        Read(arr2[j])
+        htab.insert(arr2[j],1)
+            END_IF
+        END_FOR
+
+    END_FOR
+ mykeys:=htab.getKeys()
+       FOR i FROM 0 TO 20 STEP 1  DO
+        IF (htab.get(myKeys[i])=1) THEN
+            sum:=sum+myKeys[i]
+        END_IF
+       END_FOR
+
+END
